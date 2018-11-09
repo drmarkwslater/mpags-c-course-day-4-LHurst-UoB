@@ -24,17 +24,21 @@ void PlayfairCipher::setKey( const std::string& key )
 
   // Make sure the key is upper case
   std::transform(key_.begin(), key_.end(), key_.begin(), toupper);
-  std::cout << "Key is now: " << key_ << std::endl;
 
   // Remove non-alpha characters
+  auto iter = std::remove_if(key_.begin(), key_.end(), [] (char ch) { return ! std::isalpha(ch); });
+  key_.erase(iter, key_.end());
 
   // Change J -> I
+  std::transform(key_.begin(), key_.end(), key_.begin(), [] (char ch) { return (ch == 'J' ? 'I' : ch); });
 
   // Remove duplicated letters
 
   // Store the coords of each letter
 
   // Store the playfair cipher key map
+  std::cout << "Key is now: " << key_ << std::endl;
+
 }
 
 
