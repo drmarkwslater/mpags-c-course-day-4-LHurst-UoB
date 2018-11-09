@@ -33,6 +33,20 @@ void PlayfairCipher::setKey( const std::string& key )
   std::transform(key_.begin(), key_.end(), key_.begin(), [] (char ch) { return (ch == 'J' ? 'I' : ch); });
 
   // Remove duplicated letters
+  std::string seen_chars {""};
+  auto remove_seen = [&seen_chars] (char ch) {
+    if (seen_chars.find(ch) == std::string::npos) {
+      // no ch in seen_chars
+      seen_chars += ch;
+      return false;
+    } else {
+      // ch already in seen chars
+      return true;
+    }
+  };
+
+  iter = std::remove_if(key_.begin(), key_.end(), remove_seen);
+  key_.erase(iter, key_.end());
 
   // Store the coords of each letter
 
