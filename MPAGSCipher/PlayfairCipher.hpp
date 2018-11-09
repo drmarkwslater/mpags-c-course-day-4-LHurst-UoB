@@ -4,6 +4,8 @@
 // Standard library includes
 #include <string>
 #include <vector>
+#include <utility>
+#include <map>
 
 // Our project headers
 #include "CipherMode.hpp"
@@ -46,6 +48,10 @@ class PlayfairCipher {
   private:
     /// The cipher key
     std::string key_;
+    /// The letter to coordinate map
+    std::map<char, std::pair<int, int>> letter_map_;
+    /// The coordinate to letter map
+    std::map<std::pair<int, int>, char> coord_map_;
 };
 
 #endif

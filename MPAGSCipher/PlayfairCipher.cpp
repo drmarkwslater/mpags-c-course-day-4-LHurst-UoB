@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <utility>
+#include <map>
+#include <cassert>
 
 // Out project headers
 #include "PlayfairCipher.hpp"
@@ -48,10 +51,24 @@ void PlayfairCipher::setKey( const std::string& key )
   iter = std::remove_if(key_.begin(), key_.end(), remove_seen);
   key_.erase(iter, key_.end());
 
+  // Should have a 5x5 grids worth of letters
+  assert(key_.size() == 25);
+
   // Store the coords of each letter
+  std::map<char, std::pair<int, int>> letters_coords;
+  std::map<std::pair<int, int>, char> coords_letters;
+  for ( int i=0; i<5; i++) {
+    for ( int j=0; j<5; j++) {
+      const std::pair<int, int> this_coord {i ,j};
+      const char this_letter { key_[i*5+j] };
+      letters_coords[this_letter] = this_coord;
+      coords_letters[this_coord] = this_letter;
+    }
+  }
 
   // Store the playfair cipher key map
-  std::cout << "Key is now: " << key_ << std::endl;
+  letter_map_ = letters_coords;
+  coord_map_ == coords_letters;
 
 }
 
