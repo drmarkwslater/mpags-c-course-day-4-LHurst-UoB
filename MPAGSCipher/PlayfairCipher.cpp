@@ -1,5 +1,6 @@
 
 // Standard library includes
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -19,8 +20,11 @@ void PlayfairCipher::setKey( const std::string& key )
   key_ = key;
 
   // Append the alphabet
+  key_.append("abcdefghijklmnopqrstuvwxyz");
 
   // Make sure the key is upper case
+  std::transform(key_.begin(), key_.end(), key_.begin(), toupper);
+  std::cout << "Key is now: " << key_ << std::endl;
 
   // Remove non-alpha characters
 
