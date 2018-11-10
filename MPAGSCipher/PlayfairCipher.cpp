@@ -209,17 +209,17 @@ std::string PlayfairCipher::applyCipher( const std::string& inputText,
       std::cout << "Letters " << outputText[i] << " and " << outputText[i+1] << " form a box" << std::endl;
 #endif
       /*
-       *        first --->
-       * second +--------------+
+       *        second --->
+       * first  +--------------+
        *    |   |1            2|
        *    |   |              |
        *    v   |3            4|
        *        +--------------+
        */
       // Swap with the other corner by picking the character on the same row in-line with the other character
-      const int coord1_tmp_first = coord1.first;
-      coord1.first = coord2.first;
-      coord2.first = coord1_tmp_first;
+      const int coord1_tmp_second = coord1.second;
+      coord1.second = coord2.second;
+      coord2.second = coord1_tmp_second;
     }
   // - Find the letter associated with the new coords
 #ifdef debug
