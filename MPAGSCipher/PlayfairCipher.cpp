@@ -11,6 +11,8 @@
 // Out project headers
 #include "PlayfairCipher.hpp"
 
+// I like the use of debug messages but it would be slightly be better to use a function
+// rather than a define
 #define debug
 
 PlayfairCipher::PlayfairCipher( const std::string& key )
@@ -83,6 +85,7 @@ void PlayfairCipher::setKey( const std::string& key )
 #ifdef debug
   std::cout << "Dumping stored info for letters: " << std::endl;
   std::cout << "\tletter(coords): ";
+  // good use of for_each!
   std::for_each(letter_map_.begin(), letter_map_.end(), [] (std::pair<char, std::pair<int, int>> pair) { std::cout << pair.first << '(' << pair.second.first << ',' << pair.second.second << ") "; });
   std::cout << std::endl;
   std::cout << "\t(coords)letter: ";
@@ -109,6 +112,7 @@ std::string PlayfairCipher::applyCipher( const std::string& inputText,
    * trailing Zs, Qs between Xs and Xs between double letters that may or may
    * not have been part of the original text.
    */
+  // indeed - you can't recreate the original text exactly - just apply the decrypt rules!
 
   // Use null in the last_char to indicate the start of a new digraph
   char last_char {'\0'};
@@ -117,6 +121,8 @@ std::string PlayfairCipher::applyCipher( const std::string& inputText,
    * length but in the spirit of "using what we were taught on Friday" I've
    * kept it as a lambda function
    */
+  // not necessary but good use of lambda!
+  // You can basically just repeat what you had above for the key
   auto sanitise_input = [&outputText, &last_char] (const char ch) {
     char this_ch {ch};
   // Change J -> I
