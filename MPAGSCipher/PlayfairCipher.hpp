@@ -15,6 +15,8 @@
  * \brief Contains the declaration of the PlayfairCipher class
  */
 
+using PlayfairCoords = std::pair<std::string::size_type,std::string::size_type>;
+
 /**
  * \class PlayfairCipher
  * \brief Encrypt or decrypt text using the Playfair cipher with the given key

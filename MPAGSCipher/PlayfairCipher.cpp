@@ -121,8 +121,32 @@ std::string PlayfairCipher::applyCipher( const std::string& inputText,
    * length but in the spirit of "using what we were taught on Friday" I've
    * kept it as a lambda function
    */
-  // not necessary but good use of lambda!
-  // You can basically just repeat what you had above for the key
+  // It's not just about length - it is about whether it would be used elsewhere which this wouldn't
+  // so I think I'd probably still use a lambda. However, it's definitely debatable!
+
+  // You can basically just repeat what you had above for J -> I
+  // Then use a basic foor loop:
+  /*for (std::string::size_type i{0}; i < outputText.size(); i+=2) {
+    // Always add the first of the bigram                                                                                                                                          
+    tmpText += outputText[i];
+    if ( i+1 == outputText.size() ) {
+      // If this was the last character then we need to break out                                                                                                                  
+      break;
+    } else if ( outputText[i] != outputText[i+1] ) {
+      // If the two characters in the bigram are different,                                                                                                                        
+      // simply add the second one as well                                                                                                                                         
+      tmpText += outputText[i+1];
+    } else {
+      // Otherwise, if two characters in the bigram are the same,                                                                                                                  
+      // we instead add an X (or a Q if the first was an X)                                                                                                                        
+      tmpText += (outputText[i] == 'X') ? 'Q' : 'X';
+      // Need to decrement i since the second character in this bigram now                                                                                                         
+      // becomes the first character in the next one                                                                                                                               
+      --i;
+    }
+    }*/
+
+  // this is good but probably a bit less readable than just doing a for loop as above!
   auto sanitise_input = [&outputText, &last_char] (const char ch) {
     char this_ch {ch};
   // Change J -> I
